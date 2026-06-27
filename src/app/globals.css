@@ -14,6 +14,7 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --font-sans: var(--font-noto-sans-sc), "PingFang SC", "Microsoft YaHei", sans-serif;
+  --container-7xl: 90rem; /* 1440px，主内容区宽度（默认 1280px） */
 }
 
 body {
