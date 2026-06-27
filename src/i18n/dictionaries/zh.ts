@@ -72,14 +72,14 @@ export const zhDictionary: Dictionary = {
     aboutTitle: "走进",
     aboutHighlight: "我们",
     aboutSlogan: "客户的满意是我们永远的追求",
-    viewMore: "查看更多 +",
+    viewMore: "查看更多",
     brandLine: "dongfang plastics",
     brandTitle: "匠心工艺 · 实力厂家 · 专注塑编 PE袋供应",
     featuredTitle: "精选产品",
     featuredSubtitle: "部分合作企业定制编织袋案例展示",
     viewAllCount: "查看全部 {count} 款产品",
     newsTitle: "新闻动态",
-    newsSubtitle: "了解公司最新资讯与行业动态",
+    newsSubtitle: "潍坊各区县、山东各地塑编袋行业资讯与公司动态",
     hotline: siteConfig.phones[0],
     hotlineLabel: "全国咨询热线",
     ctaTitle: "需要定制编织袋方案？",
@@ -118,9 +118,9 @@ export const zhDictionary: Dictionary = {
   },
   newsPage: {
     title: "新闻动态",
-    subtitle: "了解公司最新动态与行业资讯",
+    subtitle: "潍坊各区县、山东各地级市塑编袋、编织袋、覆膜袋、集装袋行业资讯",
     detailExtra:
-      "将继续深耕塑料编织袋领域，以优质产品和完善服务回馈广大客户的信任与支持。如需了解更多信息，欢迎通过网站联系方式与我们取得联系。",
+      "将继续深耕塑料编织袋与塑编包装领域，服务潍坊潍城、寒亭、坊子、奎文、青州、诸城、寿光、安丘、高密、昌邑、临朐、昌乐及山东省各地级市客户。如需了解覆膜编织袋、PE袋、吨袋等详情，欢迎联系我们。",
   },
   factory: {
     title: "厂景厂貌",

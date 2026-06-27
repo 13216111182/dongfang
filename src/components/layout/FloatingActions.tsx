@@ -27,7 +27,7 @@ export function FloatingActions() {
       <button
         type="button"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className={`flex h-12 w-12 items-center justify-center rounded-full bg-[#181b28] text-white shadow-lg transition hover:bg-gray-800 ${
+        className={`flex h-12 w-12 items-center justify-center rounded-full bg-gray-600 text-white shadow-lg transition hover:bg-gray-700 ${
           showTop ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
         }`}
         aria-label={dict.common.backToTop}
@@ -49,10 +49,10 @@ export function ScrollHeader({ children }: { children: React.ReactNode }) {
 
   return (
     <header
-      className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${
+      className={`fixed left-0 top-0 z-50 w-full border-b transition-all duration-300 ${
         scrolled
-          ? "bg-[#181b28]/95 py-2.5 shadow-lg backdrop-blur-md"
-          : "bg-black/40 py-4 backdrop-blur-sm"
+          ? "border-[var(--header-border)] bg-white/95 py-2.5 shadow-md backdrop-blur-md"
+          : "border-transparent bg-white/90 py-4 shadow-sm backdrop-blur-md"
       }`}
     >
       {children}

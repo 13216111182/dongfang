@@ -2,10 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { ArrowLeft, Cog, Gauge, Layers, Package } from "lucide-react";
 import { Breadcrumb, PageHeader } from "@/components/ui/PageHeader";
+import { Pagination } from "@/components/products/ProductGrid";
 import { useLocale } from "@/components/providers/LocaleProvider";
-import { getNewsByIdFromDict } from "@/i18n";
+import { paginateNews } from "@/data/news";
+import { getNewsByIdFromDict, getSortedNews } from "@/i18n";
 import { products } from "@/data/products";
 
 const factoryImages = [
@@ -110,9 +114,26 @@ export function EquipmentPageContent() {
 }
 
 export function NewsListContent() {
+  return (
+    <Suspense fallback={null}>
+      <NewsListBody />
+    </Suspense>
+  );
+}
+
+function NewsListBody() {
   const { dict } = useLocale();
+  const searchParams = useSearchParams();
   const homeHref = dict.locale === "en" ? "/en" : "/";
   const prefix = dict.locale === "en" ? "/en" : "";
+  const basePath = `${prefix}/news`;
+  const sorted = getSortedNews(dict);
+  const totalPages = Math.max(1, Math.ceil(sorted.length / 10));
+  const page = Math.min(
+    totalPages,
+    Math.max(1, parseInt(searchParams.get("page") ?? "1", 10) || 1)
+  );
+  const result = paginateNews(sorted, page, 10);
 
   return (
     <>
@@ -123,21 +144,25 @@ export function NewsListContent() {
       </div>
       <div className="mx-auto max-w-7xl px-4 pb-20 lg:px-8">
         <PageHeader title={dict.newsPage.title} subtitle={dict.newsPage.subtitle} />
-        <div className="space-y-6">
-          {dict.news.map((news) => (
+        <div className="space-y-8">
+          {result.items.map((news) => (
             <Link
               key={news.id}
               href={`${prefix}/news/${news.id}`}
-              className="group block rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition hover:shadow-md"
+              className="group block rounded-xl border border-gray-100 bg-white p-8 shadow-sm transition hover:shadow-md lg:p-10"
             >
-              <time className="text-sm text-gray-400">{news.date}</time>
-              <h2 className="mt-2 text-xl font-bold text-gray-900 group-hover:text-[#fa561d]">
+              <time className="text-lg text-gray-400">{news.date}</time>
+              <h2 className="mt-4 text-2xl font-bold leading-snug text-gray-900 group-hover:text-[#fa561d] md:text-3xl">
                 {news.title}
               </h2>
-              <p className="mt-2 text-gray-600">{news.summary}</p>
+              <p className="mt-5 text-xl leading-loose text-gray-600">{news.summary}</p>
             </Link>
           ))}
         </div>
+        <Pagination currentPage={result.page} totalPages={result.totalPages} basePath={basePath} />
+        <p className="pb-4 text-center text-base text-gray-500">
+          {dict.common.total} {result.total} {dict.common.items}
+        </p>
       </div>
     </>
   );
@@ -162,20 +187,22 @@ export function NewsDetailContent({ id }: { id: string }) {
           ]}
         />
       </div>
-      <article className="mx-auto max-w-3xl px-4 py-12 pb-20 lg:px-8">
-        <time className="text-sm text-gray-400">{news.date}</time>
-        <h1 className="mt-2 text-3xl font-bold text-gray-900">{news.title}</h1>
-        <div className="mt-8 space-y-4 leading-relaxed text-gray-600">
-          <p>{news.summary}</p>
-          <p>
+      <article className="mx-auto max-w-4xl px-4 py-14 pb-24 lg:px-8">
+        <time className="text-lg text-gray-400">{news.date}</time>
+        <h1 className="mt-4 text-4xl font-bold leading-tight text-gray-900 md:text-5xl">{news.title}</h1>
+        <div className="mt-10 space-y-7 text-xl leading-loose text-gray-600 md:text-[1.375rem] md:leading-[2]">
+          {news.content?.length
+            ? news.content.map((paragraph, i) => <p key={i}>{paragraph}</p>)
+            : <p>{news.summary}</p>}
+          <p className="border-t border-gray-100 pt-8 text-lg leading-relaxed text-gray-500">
             {dict.site.name} {dict.newsPage.detailExtra}
           </p>
         </div>
         <Link
           href={newsHref}
-          className="mt-10 inline-flex items-center gap-2 text-[#fa561d] hover:underline"
+          className="mt-12 inline-flex items-center gap-2 text-lg text-[#fa561d] hover:underline"
         >
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-5 w-5" />
           {dict.common.backToList}
         </Link>
       </article>

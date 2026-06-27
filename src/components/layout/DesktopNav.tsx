@@ -23,8 +23,8 @@ export function DesktopNav({
   };
 
   return (
-    <nav className="hidden flex-1 justify-center lg:flex">
-      <ul className="flex items-center gap-1 xl:gap-2">
+    <nav className="pointer-events-none hidden flex-1 justify-center lg:flex">
+      <ul className="pointer-events-auto flex items-center gap-1 xl:gap-2">
         {items.map((item) => (
           <li
             key={item.href}
@@ -37,7 +37,7 @@ export function DesktopNav({
               className={`relative flex items-center gap-1 px-3 py-6 text-sm font-bold transition xl:px-4 xl:text-base ${
                 isActive(item.href)
                   ? "text-[#fa561d]"
-                  : "text-white hover:text-[#fa561d]"
+                  : "text-gray-700 hover:text-[#fa561d]"
               }`}
             >
               {item.label}
@@ -51,13 +51,13 @@ export function DesktopNav({
               )}
             </Link>
             {item.children && openMenu === item.label && (
-              <div className="absolute left-1/2 top-full z-50 w-48 -translate-x-1/2 overflow-hidden rounded-lg bg-[#111] py-1 shadow-2xl ring-1 ring-white/10">
+              <div className="absolute left-1/2 top-full z-50 w-48 -translate-x-1/2 overflow-hidden rounded-lg border border-gray-100 bg-white py-1 shadow-xl">
                 {item.children.map((child) => (
                   <Link
                     key={child.href}
                     href={child.href}
                     className={`block px-5 py-3 text-sm transition hover:bg-[#fa561d] hover:text-white ${
-                      pathname === child.href ? "text-[#fa561d]" : "text-white/90"
+                      pathname === child.href ? "text-[#fa561d]" : "text-gray-700"
                     }`}
                   >
                     {child.label}

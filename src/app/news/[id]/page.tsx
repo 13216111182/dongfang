@@ -14,7 +14,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const news = getDictionary("zh").news.find((n) => n.id === id);
   if (!news) return { title: "新闻详情" };
-  return { title: news.title, description: news.summary };
+  return {
+    title: news.title,
+    description: news.summary,
+    keywords: news.keywords,
+  };
 }
 
 export default async function NewsDetailPage({ params }: Props) {

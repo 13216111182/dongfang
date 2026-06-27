@@ -18,10 +18,13 @@ import { AnimateIn } from "@/components/ui/AnimateIn";
 import { products } from "@/data/products";
 import { siteConfig } from "@/config/site";
 import { useLocale } from "@/components/providers/LocaleProvider";
+import { getSortedNews } from "@/i18n";
 
 export function HomePageContent() {
   const { dict } = useLocale();
   const prefix = dict.locale === "en" ? "/en" : "";
+  const sortedNews = getSortedNews(dict);
+  const featuredNews = sortedNews.slice(0, 9);
   const featuredProducts = products.slice(0, 12);
 
   return (
@@ -120,25 +123,36 @@ export function HomePageContent() {
           <AnimateIn>
             <SectionTitle title={dict.home.newsTitle} subtitle={dict.home.newsSubtitle} />
           </AnimateIn>
-          <div className="grid gap-6 md:grid-cols-3">
-            {dict.news.map((news, i) => (
+          <div className="grid gap-8 md:grid-cols-3">
+            {featuredNews.map((news, i) => (
               <AnimateIn key={news.id} delay={i * 80}>
                 <Link
                   href={`${prefix}/news/${news.id}`}
-                  className="group flex h-full flex-col rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-[#fa561d]/20 hover:shadow-lg"
+                  className="group flex h-full flex-col rounded-xl border border-gray-100 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-[#fa561d]/20 hover:shadow-lg"
                 >
-                  <time className="text-sm text-gray-400">{news.date}</time>
-                  <h3 className="mt-3 text-lg font-bold text-gray-900 group-hover:text-[#fa561d]">
+                  <time className="text-lg text-gray-400">{news.date}</time>
+                  <h3 className="mt-4 text-2xl font-bold leading-snug text-gray-900 group-hover:text-[#fa561d]">
                     {news.title}
                   </h3>
-                  <p className="mt-2 flex-1 line-clamp-2 text-sm text-gray-600">{news.summary}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm text-[#fa561d] opacity-0 transition group-hover:opacity-100">
-                    {dict.common.readMore} <ArrowRight className="h-3 w-3" />
+                  <p className="mt-4 flex-1 line-clamp-2 text-lg leading-loose text-gray-600">{news.summary}</p>
+                  <span className="mt-6 inline-flex items-center gap-1 text-base text-[#fa561d] opacity-0 transition group-hover:opacity-100">
+                    {dict.common.readMore} <ArrowRight className="h-4 w-4" />
                   </span>
                 </Link>
               </AnimateIn>
             ))}
           </div>
+          {sortedNews.length > 9 && (
+            <div className="mt-10 text-center">
+              <Link
+                href={`${prefix}/news`}
+                className="inline-flex items-center gap-2 text-lg font-medium text-[#fa561d] hover:underline"
+              >
+                {dict.home.viewMore}
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+            </div>
+          )}
         </div>
       </section>
 

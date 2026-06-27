@@ -5,7 +5,9 @@
   --foreground: #171717;
   --primary: #fa561d;
   --primary-dark: #e04a15;
-  --footer-bg: #181b28;
+  --footer-bg: #f3f6fa;
+  --header-bg: #ffffff;
+  --header-border: #e5eaf0;
   --section-bg: #f7f9fd;
 }
 

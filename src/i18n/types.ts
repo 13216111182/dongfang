@@ -76,7 +76,7 @@ export type Dictionary = {
   stats: { value: number; suffix: string; label: string }[];
   advantages: { title: string; description: string }[];
   categories: { slug: string; name: string; description: string }[];
-  news: { id: string; title: string; date: string; summary: string }[];
+  news: { id: string; title: string; date: string; summary: string; content: string[]; keywords?: string[] }[];
   about: {
     title: string;
     subtitle: string;

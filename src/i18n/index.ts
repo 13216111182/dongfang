@@ -1,4 +1,5 @@
 import type { Dictionary, Locale } from "./types";
+import { sortNewsByDate } from "@/data/news";
 import { zhDictionary } from "./dictionaries/zh";
 import { enDictionary } from "./dictionaries/en";
 
@@ -31,6 +32,10 @@ export function getCategoryBySlugFromDict(dict: Dictionary, slug: string) {
 
 export function getNewsByIdFromDict(dict: Dictionary, id: string) {
   return dict.news.find((n) => n.id === id);
+}
+
+export function getSortedNews(dict: Dictionary) {
+  return sortNewsByDate(dict.news);
 }
 
 export type { Dictionary, Locale };

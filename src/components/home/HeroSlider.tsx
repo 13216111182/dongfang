@@ -44,25 +44,26 @@ export function HeroSlider() {
                 priority
                 sizes="100vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
-              <div className="absolute bottom-[20%] left-[8%] max-w-lg text-white">
-                <p className="mb-2 text-sm font-medium tracking-widest text-[#fa561d] uppercase">
-                  {dict.home.bannerTag}
-                </p>
-                <h2 className="text-2xl font-bold drop-shadow-lg md:text-4xl">
-                  {dict.home[banner.key]}
-                </h2>
-              </div>
             </Link>
           </SwiperSlide>
         ))}
       </Swiper>
-      <button type="button" className="hero-prev absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm transition hover:bg-[#fa561d] md:left-8" aria-label="Previous">
-        <ChevronLeft className="h-6 w-6" />
-      </button>
-      <button type="button" className="hero-next absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm transition hover:bg-[#fa561d] md:right-8" aria-label="Next">
-        <ChevronRight className="h-6 w-6" />
-      </button>
+      <div className="absolute bottom-6 right-4 z-10 flex items-center gap-2 md:right-8">
+        <button
+          type="button"
+          className="hero-prev flex h-10 w-10 items-center justify-center rounded-full bg-white/85 text-gray-800 shadow-md backdrop-blur-sm transition hover:bg-[#fa561d] hover:text-white"
+          aria-label="Previous"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          type="button"
+          className="hero-next flex h-10 w-10 items-center justify-center rounded-full bg-white/85 text-gray-800 shadow-md backdrop-blur-sm transition hover:bg-[#fa561d] hover:text-white"
+          aria-label="Next"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+      </div>
     </section>
   );
 }
