@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { Phone, Package } from "lucide-react";
-import { siteConfig, primaryPhone } from "@/config/site";
+import { Phone } from "lucide-react";
+import { primaryPhone } from "@/config/site";
 import { useLocale } from "@/components/providers/LocaleProvider";
 
 export function MobileBottomBar() {
@@ -15,13 +14,13 @@ export function MobileBottomBar() {
       <ul className="grid grid-cols-3">
         <li>
           <Link href={prefix || "/"} className="flex flex-col items-center py-2 text-xs text-gray-600">
-            <Package className="mb-1 h-5 w-5" />
+            <img src="/images/icons/i3.png" alt="" className="mb-1 h-5 w-5 invert" />
             {dict.mobileBar.home}
           </Link>
         </li>
         <li>
           <Link href={`${prefix}/products`} className="flex flex-col items-center py-2 text-xs text-gray-600">
-            <Image src="/images/icons/i4.png" alt="" width={20} height={20} className="mb-1" />
+            <img src="/images/icons/i4.png" alt="" className="mb-1 h-5 w-5 invert" />
             {dict.mobileBar.products}
           </Link>
         </li>

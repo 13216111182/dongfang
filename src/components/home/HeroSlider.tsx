@@ -21,48 +21,52 @@ export function HeroSlider() {
   const prefix = dict.locale === "en" ? "/en" : "";
 
   return (
-    <section className="relative w-full">
-      <Swiper
-        modules={[Autoplay, Pagination, Navigation, EffectFade]}
-        effect="fade"
-        fadeEffect={{ crossFade: true }}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
-        pagination={{ clickable: true }}
-        navigation={{ prevEl: ".hero-prev", nextEl: ".hero-next" }}
-        loop
-        speed={1200}
-        className="hero-swiper aspect-[16/7] max-h-[720px] w-full md:aspect-[21/8]"
-      >
-        {bannerImages.map((banner) => (
-          <SwiperSlide key={banner.image}>
-            <Link href={`${prefix}${banner.href}`} className="relative block h-full w-full">
-              <Image
-                src={banner.image}
-                alt={dict.home[banner.key]}
-                fill
-                className="object-cover transition-transform duration-[1200ms] hover:scale-105"
-                priority
-                sizes="100vw"
-              />
-            </Link>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <div className="absolute bottom-6 right-4 z-10 flex items-center gap-2 md:right-8">
-        <button
-          type="button"
-          className="hero-prev flex h-10 w-10 items-center justify-center rounded-full bg-white/85 text-gray-800 shadow-md backdrop-blur-sm transition hover:bg-[#fa561d] hover:text-white"
-          aria-label="Previous"
+    <section className="relative w-full pt-[5.5rem] sm:pt-24 lg:pt-[6.25rem]">
+      <div className="relative h-60 w-full overflow-hidden sm:h-72 md:h-auto md:aspect-[21/8] md:max-h-[720px]">
+        <Swiper
+          modules={[Autoplay, Pagination, Navigation, EffectFade]}
+          effect="fade"
+          fadeEffect={{ crossFade: true }}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          pagination={{ clickable: true }}
+          navigation={{ prevEl: ".hero-prev", nextEl: ".hero-next" }}
+          loop
+          speed={1200}
+          className="hero-swiper absolute inset-0 h-full w-full"
         >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-        <button
-          type="button"
-          className="hero-next flex h-10 w-10 items-center justify-center rounded-full bg-white/85 text-gray-800 shadow-md backdrop-blur-sm transition hover:bg-[#fa561d] hover:text-white"
-          aria-label="Next"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button>
+          {bannerImages.map((banner) => (
+            <SwiperSlide key={banner.image}>
+              <Link href={`${prefix}${banner.href}`} className="relative block h-full w-full">
+                <Image
+                  src={banner.image}
+                  alt={dict.home[banner.key]}
+                  fill
+                  className="object-cover object-center"
+                  priority
+                  sizes="100vw"
+                />
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <div className="pointer-events-none absolute inset-0 z-10">
+          <div className="pointer-events-auto absolute bottom-6 right-4 flex items-center gap-2 md:right-8">
+            <button
+              type="button"
+              className="hero-prev flex h-10 w-10 items-center justify-center rounded-full bg-white/85 text-gray-800 shadow-md backdrop-blur-sm transition hover:bg-[#fa561d] hover:text-white"
+              aria-label="Previous"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              className="hero-next flex h-10 w-10 items-center justify-center rounded-full bg-white/85 text-gray-800 shadow-md backdrop-blur-sm transition hover:bg-[#fa561d] hover:text-white"
+              aria-label="Next"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );

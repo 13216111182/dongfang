@@ -25,6 +25,11 @@ body {
 }
 
 /* Hero Swiper */
+.hero-swiper .swiper-wrapper,
+.hero-swiper .swiper-slide {
+  height: 100%;
+}
+
 .hero-swiper .swiper-pagination {
   bottom: 24px !important;
 }
