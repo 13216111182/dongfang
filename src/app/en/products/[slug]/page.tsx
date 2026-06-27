@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CategoryPageContent } from "@/views/CategoryPageContent";
 import { categories, getCategoryBySlug } from "@/data/categories";
-import { getProductsByCategory, paginateProducts } from "@/data/products";
+import { getProductsByCategory } from "@/data/products";
 import { getDictionary } from "@/i18n";
 
 export function generateStaticParams() {
@@ -11,7 +11,6 @@ export function generateStaticParams() {
 
 type Props = {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ page?: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -22,20 +21,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: category.name, description: category.description };
 }
 
-export default async function EnCategoryPage({ params, searchParams }: Props) {
+export default async function EnCategoryPage({ params }: Props) {
   const { slug } = await params;
-  const query = await searchParams;
   if (!getCategoryBySlug(slug)) notFound();
-
-  const page = Math.max(1, parseInt(query.page ?? "1", 10) || 1);
-  const result = paginateProducts(getProductsByCategory(slug), page, 32);
 
   return (
     <CategoryPageContent
       slug={slug}
-      items={result.items}
-      page={result.page}
-      totalPages={result.totalPages}
+      products={getProductsByCategory(slug)}
       basePath={`/en/products/${slug}`}
     />
   );

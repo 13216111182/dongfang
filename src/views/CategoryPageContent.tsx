@@ -1,24 +1,26 @@
 "use client";
 
 import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { Breadcrumb, PageHeader } from "@/components/ui/PageHeader";
 import { CategoryFilter } from "@/components/products/CategoryFilter";
 import { ProductGrid, Pagination } from "@/components/products/ProductGrid";
 import { AnimateIn } from "@/components/ui/AnimateIn";
 import { useLocale } from "@/components/providers/LocaleProvider";
 import { getCategoryBySlugFromDict } from "@/i18n";
-import type { Product } from "@/data/products";
+import { paginateProducts, type Product } from "@/data/products";
 
 type Props = {
   slug: string;
-  items: Product[];
-  page: number;
-  totalPages: number;
+  products: Product[];
   basePath: string;
 };
 
-export function CategoryPageContent({ slug, items, page, totalPages, basePath }: Props) {
+function CategoryPageBody({ slug, products, basePath }: Props) {
   const { dict } = useLocale();
+  const searchParams = useSearchParams();
+  const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10) || 1);
+  const result = paginateProducts(products, page, 32);
   const category = getCategoryBySlugFromDict(dict, slug);
   const homeHref = dict.locale === "en" ? "/en" : "/";
   const productsHref = dict.locale === "en" ? "/en/products" : "/products";
@@ -41,15 +43,23 @@ export function CategoryPageContent({ slug, items, page, totalPages, basePath }:
         <Suspense fallback={null}>
           <CategoryFilter />
         </Suspense>
-        {items.length > 0 ? (
+        {result.items.length > 0 ? (
           <AnimateIn>
-            <ProductGrid products={items} />
-            <Pagination currentPage={page} totalPages={totalPages} basePath={basePath} />
+            <ProductGrid products={result.items} />
+            <Pagination currentPage={result.page} totalPages={result.totalPages} basePath={basePath} />
           </AnimateIn>
         ) : (
           <p className="pb-20 text-center text-gray-500">{dict.products.emptyCategory}</p>
         )}
       </div>
     </>
+  );
+}
+
+export function CategoryPageContent({ slug, products, basePath }: Props) {
+  return (
+    <Suspense fallback={null}>
+      <CategoryPageBody slug={slug} products={products} basePath={basePath} />
+    </Suspense>
   );
 }

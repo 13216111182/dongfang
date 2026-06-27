@@ -1,11 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  output: "export", // 开启静态导出
+  output: "export",
   images: {
-    unoptimized: true // Cloudflare不支持Next内置图片优化，必须关闭
-  }
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;

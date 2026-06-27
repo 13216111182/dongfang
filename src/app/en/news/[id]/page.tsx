@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NewsDetailContent } from "@/views/MiscPagesContent";
+import { newsItems } from "@/data/news";
 import { getDictionary } from "@/i18n";
+
+export function generateStaticParams() {
+  return newsItems.map((item) => ({ id: item.id }));
+}
 
 type Props = { params: Promise<{ id: string }> };
 
