@@ -1,0 +1,177 @@
+import type { Dictionary } from "../types";
+import { siteConfig, stats, advantages } from "@/config/site";
+import { categories } from "@/data/categories";
+import { newsItems } from "@/data/news";
+
+const prefix = "";
+
+export const zhDictionary: Dictionary = {
+  locale: "zh",
+  langTag: "zh-CN",
+  site: {
+    name: siteConfig.name,
+    shortName: siteConfig.shortName,
+    description: siteConfig.description,
+    keywords: [...siteConfig.keywords],
+    contactPerson: siteConfig.contactPerson,
+    address: siteConfig.address,
+    aboutText: siteConfig.aboutText,
+  },
+  nav: [
+    { label: "综合首页", href: `${prefix}/` },
+    { label: "公司简介", href: `${prefix}/about` },
+    {
+      label: "产品中心",
+      href: `${prefix}/products`,
+      children: categories.map((c) => ({
+        label: c.name,
+        href: `${prefix}/products/${c.slug}`,
+      })),
+    },
+    { label: "新闻动态", href: `${prefix}/news` },
+    { label: "厂景厂貌", href: `${prefix}/factory` },
+    { label: "生产设备", href: `${prefix}/equipment` },
+    { label: "联系我们", href: `${prefix}/contact` },
+  ],
+  langSwitch: { label: "EN", href: "/en" },
+  common: {
+    home: "首页",
+    readMore: "阅读更多",
+    viewAll: "查看全部",
+    viewDetail: "查看详情",
+    contactNow: "立即联系",
+    consultOrder: "咨询订购",
+    callNow: "立即咨询",
+    backToList: "返回新闻列表",
+    prev: "上一页",
+    next: "下一页",
+    total: "共",
+    items: "条",
+    category: "分类",
+    phone: "手机",
+    mobile: "手机端",
+    tel: "电话",
+    fax: "传真",
+    email: "电子邮箱",
+    address: "公司地址",
+    contactPerson: "联系人",
+    submit: "提交咨询",
+    scanMobile: "扫码访问手机端",
+    backToTop: "回到顶部",
+    phoneConsult: "电话咨询",
+  },
+  home: {
+    bannerTag: "专业塑编生产厂家",
+    banner1: "PE袋 · 专业定制生产",
+    banner2: "编织袋 · 种类多样",
+    productsTitle: "产品展示",
+    productsHighlight: "种类多样",
+    productsSubtitle: "公司生产设备齐全 · 制作工艺好 · 售后服务优良",
+    viewAllProducts: "查看全部产品",
+    aboutTag: "About us",
+    aboutTitle: "走进",
+    aboutHighlight: "我们",
+    aboutSlogan: "客户的满意是我们永远的追求",
+    viewMore: "查看更多 +",
+    brandLine: "dongfang plastics",
+    brandTitle: "匠心工艺 · 实力厂家 · 专注塑编 PE袋供应",
+    featuredTitle: "精选产品",
+    featuredSubtitle: "部分合作企业定制编织袋案例展示",
+    viewAllCount: "查看全部 {count} 款产品",
+    newsTitle: "新闻动态",
+    newsSubtitle: "了解公司最新资讯与行业动态",
+    hotline: siteConfig.phones[0],
+    hotlineLabel: "全国咨询热线",
+    ctaTitle: "需要定制编织袋方案？",
+    ctaSubtitle: `欢迎来电咨询，${siteConfig.contactPerson} 将为您提供从产品选型到批量生产的一站式服务。`,
+    advantagesTitle: "为什么选择我们",
+    advantagesSubtitle: "匠心工艺 · 实力厂家 · 专注塑编 PE袋供应",
+  },
+  stats: stats.map((s) => ({ ...s })),
+  advantages: advantages.map((a) => ({ ...a })),
+  categories: categories.map((c) => ({
+    slug: c.slug,
+    name: c.name,
+    description: c.description,
+  })),
+  news: newsItems.map((n) => ({ ...n })),
+  about: {
+    title: "公司简介",
+    subtitle: `${siteConfig.name} — 专业塑料编织袋生产厂家`,
+    extra:
+      "我们始终坚持「质量第一、客户至上」的经营理念，建立了完善的质量管理体系，从原料采购到成品出厂全程严格把控。",
+    stats: [
+      { label: "成立年份", value: "2006年" },
+      { label: "年产能", value: "1.2亿条" },
+      { label: "集装袋产能", value: "600万条/年" },
+      { label: "服务区域", value: "全国多省" },
+    ],
+  },
+  products: {
+    title: "产品展示",
+    subtitle:
+      "青州市东方塑业有限公司主营各类塑料编织袋、覆膜编织袋等产品，制作工艺好，售后服务优良。",
+    all: "全部产品",
+    detailDesc:
+      "该产品由{company}专业生产，采用优质原料和先进工艺制造，可根据客户需求进行规格、印刷、覆膜等个性化定制。欢迎来电咨询详情。",
+    emptyCategory: "该分类暂无产品，请浏览其他分类或联系我们定制。",
+  },
+  newsPage: {
+    title: "新闻动态",
+    subtitle: "了解公司最新动态与行业资讯",
+    detailExtra:
+      "将继续深耕塑料编织袋领域，以优质产品和完善服务回馈广大客户的信任与支持。如需了解更多信息，欢迎通过网站联系方式与我们取得联系。",
+  },
+  factory: {
+    title: "厂景厂貌",
+    subtitle: "现代化生产基地，整洁有序的生产环境",
+    images: [
+      { alt: "厂区全景" },
+      { alt: "生产车间" },
+      { alt: "仓储区域" },
+      { alt: "成品展示" },
+    ],
+  },
+  equipment: {
+    title: "生产设备",
+    subtitle: "引进先进设备，保障产品品质与交付效率",
+    items: [
+      {
+        title: "编织袋生产线",
+        description: "多条全自动编织袋生产线，日产量高，规格切换灵活。",
+      },
+      {
+        title: "覆膜设备",
+        description: "先进覆膜工艺，提升产品防水、防潮性能。",
+      },
+      {
+        title: "彩印设备",
+        description: "支持多色印刷，满足企业品牌定制需求。",
+      },
+      {
+        title: "质检设备",
+        description: "完善的质量检测流程，确保产品稳定可靠。",
+      },
+    ],
+  },
+  contact: {
+    title: "联系我们",
+    subtitle: "欢迎来电咨询，我们将竭诚为您服务",
+    formTitle: "在线咨询",
+    formSubtitle: "填写以下信息，我们将尽快与您联系",
+    namePlaceholder: "您的姓名",
+    phonePlaceholder: "联系电话",
+    messagePlaceholder: "咨询内容（产品规格、数量等）",
+  },
+  footer: {
+    hotline: "咨询服务电话",
+    categories: "产品分类",
+    contact: "联系我们",
+    quickLinks: "快速链接",
+    factory: "厂景厂貌",
+    equipment: "生产设备",
+    news: "新闻动态",
+    about: "公司简介",
+  },
+  mobileBar: { home: "首页", products: "产品", phone: "电话" },
+};
